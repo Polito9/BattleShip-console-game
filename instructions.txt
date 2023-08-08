@@ -1,0 +1,18 @@
+Un juego parecido a battleship que muestre en consola tu juego y el de la computadora (sin mostrar) generado aleatoriamente con 5 barcos: 
+
+2 barcos 3x1
+3 barcos 1x1
+2 barco 2x1
+ En el siguienite formato, 
+ siendo * un lugar donde hay un barco y - casillas libres
+
+  -  -  -  -  -  *  -  -  -  -
+  -  -  -  -  -  *  -  -  -  -
+  -  *  -  -  -  *  -  -  -  -
+  -  *  -  -  -  -  -  -  -  -
+  -  -  -  -  -  -  -  -  -  -
+  -  -  -  -  -  -  *  *  *  -
+  -  -  -  -  -  -  -  -  -  -
+  -  *  -  -  -  *  *  -  -  -
+  -  -  -  -  -  -  -  -  -  *
+  -  -  -  *  -  -  -  -  -  -
