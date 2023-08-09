@@ -4,15 +4,48 @@ Un juego parecido a battleship que muestre en consola tu juego y el de la comput
 3 barcos 1x1
 2 barco 2x1
  En el siguienite formato, 
- siendo * un lugar donde hay un barco y - casillas libres
-
+ siendo:
+ (*) un lugar donde hay un barco 
+ (-) casillas libres
+ (o) una casilla sin nada descubierta por el contrincante
+ (X) Una casilla descubierta por el contrincante dónde haya un barco
   -  -  -  -  -  *  -  -  -  -
   -  -  -  -  -  *  -  -  -  -
   -  *  -  -  -  *  -  -  -  -
   -  *  -  -  -  -  -  -  -  -
-  -  -  -  -  -  -  -  -  -  -
-  -  -  -  -  -  -  *  *  *  -
+  -  -  -  -  -  o  -  -  -  -
+  -  -  -  -  o  -  X  X  *  -
   -  -  -  -  -  -  -  -  -  -
   -  *  -  -  -  *  *  -  -  -
   -  -  -  -  -  -  -  -  -  *
   -  -  -  *  -  -  -  -  -  -
+
+
+El tablero del contricante será mostrado de la siguiente manera:
+
+Siendo 
+
+(-) casillas no elegidas
+(X) casillas que tienen barco
+(o) casillas elegidas por el jugador que no tienen barco
+  -  -  -  -  -  -  -  -  -  -
+  -  -  -  -  -  -  -  -  o  -
+  -  -  -  -  -  -  -  -  -  -
+  -  -  -  o  -  -  -  -  -  -
+  -  -  -  -  -  -  -  -  -  -
+  -  -  -  -  -  -  X  X  -  -
+  -  -  -  -  -  -  -  -  -  -
+  -  -  -  -  -  -  -  -  -  -
+  -  -  -  -  -  -  -  -  -  -
+  -  -  -  -  -  -  -  -  -  -
+
+Para jugar el usuario debe teclear las posiciones de la siguiente manera
+X: "Input del usuario"
+Y: "Input del usuario"
+
+De esta manera se elige la casilla que se va a seleccionar y revelar, si atinas en un barco tienes la oportunidad de elegir otra casilla
+
+La computadora elegirá de manera aleatoria, pero si llega a atinar va a elegir una casilla cercana, y podrá ir recordando si ya atinó por ejemplo el barco de 3x1 y así si encontró ya 3x1 no buscará un cuarto cuadrito. 
+Si la computadora no tiene ninguna pista entonces decidirá de manera aleatoria.
+
+Al terminar el juego mostrar ambos mapas de juego sin censurar nada.
