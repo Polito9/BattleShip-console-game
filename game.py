@@ -5,6 +5,7 @@ psw_computer = [] #Saves the positions where the ship is for the computer map
 player_map = []
 computer_map = []
 gameFinished = False
+computer_hint = False #To the machine could know if it has a hint
 def generateEmptyMap(): #We create an empty map
     my_map = []
     for i in range(10):#To create each row
@@ -75,40 +76,53 @@ def validatePosition(x, y, map, psw, msg_c, msg_i): #Checks if the position is o
         map[int(x)][int(y)] = " X "
         psw.remove(mini_list)
         print(msg_c)
+        return True
     else:
         map[int(x)][int(y)] = " O " #cambio la variable
         print(msg_i)
+        return False
 
 def playPlayer_sTurn(): #Plays all the steps of the players turn
     global psw_computer
     global computer_map
-    continue_game = False
-    while not continue_game:
-        y = int(input("Enter the x-coordinate: "))
-        x = 9 - int(input("Enter the y-coordinate: "))
-        continue_game = (x <= 9 and x >= 0) and (y <= 9 and y >= 0)
-        if not continue_game:
-            print("Valores ingresados no válidos, intentalo nuevamente\n\n")
-    msg_c = "<<<<Congrats, you got it!>>>>"
-    msg_i = "<<<<Sorry, you've failed>>>>"
-    validatePosition(x, y, computer_map, psw_computer, msg_c, msg_i)
-    print("_____________________________________\nCOMPUTER MAP: ")
+    correct = True
+    while correct:
+        continue_game = False
+        while not continue_game:
+            try:
+                y = int(input("Enter the x-coordinate: "))
+                x = 9 - int(input("Enter the y-coordinate: "))
+                continue_game = (x <= 9 and x >= 0) and (y <= 9 and y >= 0)
+                if not continue_game:
+                    print("Valores ingresados no válidos, intentalo nuevamente\n\n")
+            except ValueError:
+                print("Por favor ingresa un valor válido")
+        msg_c = "<<<<Congrats, you got it!>>>>"
+        msg_i = "<<<<Sorry, you've failed>>>>"
+        correct = validatePosition(x, y, computer_map, psw_computer, msg_c, msg_i)
+        print("COMPUTER MAP: ")
+        printCensoredMap(computer_map)
+        print("_____________________________________________________")
+        
 
 def playComputer_sTurn(): #Plays and checks everything for making a good computer turn
     #if there is no hint
     global psw_computer
     global player_map
-    #By random
-    x = random.randint(0, 9)
-    y = random.randint(0, 9)
-    msg_c = "The computer has hit"
-    msg_i = "The computer failed"
-    validatePosition(x, y, player_map, psw_player, msg_c, msg_i)
-    print("_____________________________________\n YOUR MAP: ")
-    printAllMap(player_map)
+    global computer_hint
+    correct = True
+    while correct:
+        #By random
+        x = random.randint(0, 9)
+        y = random.randint(0, 9)
+        msg_c = "<<<<The computer has hit>>>>"
+        msg_i = "<<<<The computer failed>>>>"
+        correct = validatePosition(x, y, player_map, psw_player, msg_c, msg_i)
+        print("YOUR MAP: ")
+        printAllMap(player_map)
+        print("_____________________________________________________")
+        #Validates if it has a hint, and selects one box according to that
 
-    #Validates if it has a hint, and selects one box according to that
-    
 def startGame():
     global player_map
     global computer_map
@@ -124,20 +138,18 @@ def startGame():
     addShipstoMap(computer_map, 1, 3, psw_computer)
     addShipstoMap(computer_map, 2, 2, psw_computer)
 
-#Computers turn
 startGame()
 print("This is your map:")
 printAllMap(player_map)
 #Specify that cordinates start ar superior corner left. 
 while not gameFinished:
     while len(psw_computer) > 0 and len(psw_player) > 0:
+
         input("\n\nIt's your turn. Enter to continue\n")
         playPlayer_sTurn()
-        printCensoredMap(computer_map)
         #Turno de la computadora
         input("\n\nIt's computer's turn. Enter to continue\n")
         playComputer_sTurn()
-        print("PSW_C SIZE: "+str(len(psw_computer)))
     else:
         print("GAME FINISHED, THERE ARE THE RESULTS: \n\n")
         if (len(psw_player) > 0):
